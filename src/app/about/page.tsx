@@ -21,7 +21,7 @@ export default function AboutMe() {
       </motion.div>
 
       {/* Image and Bio Section */}
-      <div className="container mx-auto px-4 grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+      <div className="container mx-auto px-4 grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12 min-h-screen">
         {/* Image */}
         <motion.div
           initial={{ opacity: 0, x: -20 }}
