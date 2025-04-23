@@ -1,7 +1,6 @@
 "use client";
-import React from 'react';
-import { motion } from 'framer-motion';
-import Link from 'next/link';
+import React from "react";
+import { motion } from "framer-motion";
 
 interface ProjectCardProps {
   title: string;
@@ -9,13 +8,21 @@ interface ProjectCardProps {
   link: string;
   imageUrl?: string;
   tags?: string[];
+  onViewMore?: () => void; // New optional prop
 }
 
-const ProjectCard: React.FC<ProjectCardProps> = ({ title, description, link, imageUrl, tags }) => {
+const ProjectCard: React.FC<ProjectCardProps> = ({
+  title,
+  description,
+  link,
+  imageUrl,
+  tags,
+  onViewMore,
+}) => {
   return (
     <motion.div
       whileHover={{ scale: 1.03 }}
-      transition={{ type: 'spring', stiffness: 300 }}
+      transition={{ type: "spring", stiffness: 300 }}
       className="bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-200 hover:border-transparent"
     >
       {imageUrl && (
@@ -27,11 +34,9 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ title, description, link, ima
           />
         </div>
       )}
-
       <div className="p-6">
         <h2 className="text-2xl font-semibold mb-3 text-gray-800">{title}</h2>
         <p className="text-gray-600 mb-4 leading-relaxed">{description}</p>
-
         {tags && (
           <div className="flex flex-wrap gap-2 mb-4">
             {tags.map((tag) => (
@@ -44,15 +49,12 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ title, description, link, ima
             ))}
           </div>
         )}
-
-        <Link
-          href={link}
+        <button
+          onClick={onViewMore}
           className="inline-block mt-2 text-blue-600 font-medium hover:underline"
-          target="_blank"
-          rel="noopener noreferrer"
         >
           View More &rarr;
-        </Link>
+        </button>
       </div>
     </motion.div>
   );

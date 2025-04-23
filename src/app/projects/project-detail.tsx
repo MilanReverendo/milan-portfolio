@@ -1,8 +1,8 @@
 "use client";
-import React from "react";
-import { useRouter } from "next/navigation";
-import { motion } from "framer-motion";
-import ProjectCard from "@/components/ProjectCard";
+import React from 'react';
+import { useRouter } from 'next/router';
+import { motion } from 'framer-motion';
+import ProjectCard from '@/components/ProjectCard';
 
 interface Project {
   title: string;
@@ -87,7 +87,7 @@ export default function Projects() {
             link={project.link}
             imageUrl={project.imageUrl}
             tags={project.tags}
-            onViewMore={() => handleViewMore(project.title)} // Pass the handler here
+            onViewMore={() => handleViewMore(project.title)}
           />
         ))}
       </div>
