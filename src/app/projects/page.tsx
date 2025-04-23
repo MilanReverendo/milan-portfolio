@@ -58,7 +58,7 @@ const dummyProjects: Project[] = [
 
 export default function Projects() {
   return (
-    <section className="py-12 bg-gray-50">
+    <section className="py-12 bg-gray-50 min-h-screen">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}

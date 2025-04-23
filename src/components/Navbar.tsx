@@ -1,9 +1,9 @@
 "use client";
-import React, { useState } from 'react';
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X } from 'lucide-react';
+import React, { useState } from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { motion, AnimatePresence } from "framer-motion";
+import { Menu, X } from "lucide-react";
 
 interface NavItem {
   label: string;
@@ -11,10 +11,10 @@ interface NavItem {
 }
 
 const navItems: NavItem[] = [
-  { label: 'Home', href: '/' },
-  { label: 'About Me', href: '/about' },
-  { label: 'Internship', href: '/internship' },
-  { label: 'Projects', href: '/projects' },
+  { label: "Home", href: "/" },
+  { label: "About Me", href: "/about" },
+  { label: "Internship", href: "/internship" },
+  { label: "Projects", href: "/projects" },
 ];
 
 const linkVariants = {
@@ -24,7 +24,7 @@ const linkVariants = {
 
 const underlineVariants = {
   initial: { width: 0 },
-  animate: { width: '100%' },
+  animate: { width: "100%" },
 };
 
 const Navbar: React.FC = () => {
@@ -50,17 +50,19 @@ const Navbar: React.FC = () => {
             const isActive = pathname === item.href;
             return (
               <motion.div key={item.href} className="relative">
-                <Link href={item.href}>
-                  <motion.a
+                <Link
+                  href={item.href}
+                  className={`text-gray-700 font-medium transition-colors ${
+                    isActive ? "text-blue-600" : "hover:text-blue-600"
+                  }`}
+                >
+                  <motion.span
                     variants={linkVariants}
                     initial="initial"
                     whileHover="hover"
-                    className={`text-gray-700 font-medium transition-colors ${
-                      isActive ? 'text-blue-600' : 'hover:text-blue-600'
-                    }`}
                   >
                     {item.label}
-                  </motion.a>
+                  </motion.span>
                 </Link>
                 {/* Active underline */}
                 <AnimatePresence>
@@ -95,7 +97,7 @@ const Navbar: React.FC = () => {
           <motion.div
             key="mobile"
             initial={{ height: 0, opacity: 0 }}
-            animate={{ height: 'auto', opacity: 1 }}
+            animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.3 }}
             className="lg:hidden bg-white/90 backdrop-blur border-t border-gray-200"
@@ -104,15 +106,15 @@ const Navbar: React.FC = () => {
               {navItems.map((item) => {
                 const isActive = pathname === item.href;
                 return (
-                  <Link key={item.href} href={item.href}>
-                    <a
-                      onClick={() => setOpen(false)}
-                      className={`text-gray-700 font-medium text-lg transition-colors ${
-                        isActive ? 'text-blue-600' : 'hover:text-blue-600'
-                      }`}
-                    >
-                      {item.label}
-                    </a>
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    className={`text-gray-700 font-medium text-lg transition-colors ${
+                      isActive ? "text-blue-600" : "hover:text-blue-600"
+                    }`}
+                    onClick={() => setOpen(false)}
+                  >
+                    {item.label}
                   </Link>
                 );
               })}
