@@ -33,7 +33,7 @@ const Navbar: React.FC = () => {
   const pathname = usePathname();
 
   return (
-    <header className="sticky top-0 w-full z-50 bg-white border-b border-gray-200">
+    <header className="sticky top-0 w-full z-50 bg-white border-b border-gray-200 opacity-90">
       <div className="container mx-auto flex items-center justify-between px-6 py-4">
         {/* Logo */}
         <motion.div
