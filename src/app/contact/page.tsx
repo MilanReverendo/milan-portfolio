@@ -1,35 +1,42 @@
-"use client";
+'use client';
+
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({ name: "", email: "", message: "" });
   const [status, setStatus] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setStatus("loading");
+    setIsSubmitting(true);
+    setStatus("");
 
     try {
-      const response = await fetch("/api/contact", {
+      const response = await fetch("/api/send-email", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
       });
 
+      const result = await response.json();
+
       if (response.ok) {
         setStatus("success");
         setFormData({ name: "", email: "", message: "" });
       } else {
-        setStatus("error");
+        setStatus(result.error || "error");
       }
     } catch (error) {
-      console.error(error);
+      console.error("Error sending email:", error);
       setStatus("error");
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -97,7 +104,7 @@ export default function ContactPage() {
               name="message"
               value={formData.message}
               onChange={handleChange}
-              rows={6} // Increased for better visibility
+              rows={6}
               className="w-full px-4 py-3 text-lg border border-gray-300 rounded-lg shadow-sm focus:border-yellow-500 focus:ring-2 focus:ring-yellow-500 transition-colors duration-200 placeholder-gray-400"
               placeholder="Your Message"
               required
@@ -107,9 +114,12 @@ export default function ContactPage() {
             type="submit"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="w-full bg-yellow-500 text-white py-2 rounded-lg font-medium shadow-lg hover:bg-yellow-600 focus:outline-none focus:ring-4 focus:ring-yellow-300"
+            disabled={isSubmitting}
+            className={`w-full bg-yellow-500 text-white py-2 rounded-lg font-medium shadow-lg hover:bg-yellow-600 focus:outline-none focus:ring-4 focus:ring-yellow-300 ${
+              isSubmitting ? 'opacity-50 cursor-not-allowed' : ''
+            }`}
           >
-            {status === "loading" ? "Sending..." : "Send Message"}
+            {isSubmitting ? "Sending..." : "Send Message"}
           </motion.button>
         </motion.form>
         {status === "success" && <p className="text-green-600 mt-4">Message sent successfully!</p>}
