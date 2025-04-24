@@ -15,6 +15,7 @@ const navItems: NavItem[] = [
   { label: "About Me", href: "/about" },
   { label: "Internship", href: "/internship" },
   { label: "Projects", href: "/projects" },
+  { label: "Contact", href: "/contact" },
 ];
 
 const linkVariants = {
@@ -32,7 +33,7 @@ const Navbar: React.FC = () => {
   const pathname = usePathname();
 
   return (
-    <header className="fixed top-0 w-full z-50 backdrop-blur bg-white/40 border-b border-gray-200">
+    <header className="sticky top-0 w-full z-50 bg-white border-b border-gray-200">
       <div className="container mx-auto flex items-center justify-between px-6 py-4">
         {/* Logo */}
         <motion.div
@@ -64,7 +65,6 @@ const Navbar: React.FC = () => {
                     {item.label}
                   </motion.span>
                 </Link>
-                {/* Active underline */}
                 <AnimatePresence>
                   {isActive && (
                     <motion.span
@@ -100,7 +100,7 @@ const Navbar: React.FC = () => {
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="lg:hidden bg-white/90 backdrop-blur border-t border-gray-200"
+            className="lg:hidden bg-white border-t border-gray-200"
           >
             <nav className="flex flex-col items-center py-4 space-y-4">
               {navItems.map((item) => {

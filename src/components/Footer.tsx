@@ -16,7 +16,7 @@ const footerVariants = {
 };
 
 const Footer: React.FC = () => (
-  <footer className="fixed bottom-0 w-full backdrop-blur bg-white/30 border-t border-gray-200 z-40">
+  <footer className="w-full bg-white border-t border-gray-200 z-40">
     <motion.div
       initial="hidden"
       whileInView="visible"
@@ -68,8 +68,8 @@ const Footer: React.FC = () => (
     </motion.div>
 
     {/* Bottom Bar */}
-    <div className="bg-gray-100 bg-opacity-50 border-t border-gray-200 py-2">
-      <p className="text-center text-xs text-gray-500">&copy; {new Date().getFullYear()} Milan. All rights reserved.</p>
+    <div className="bg-gray-100 py-2">
+      <p className="text-center text-xs text-gray-500">© {new Date().getFullYear()} Milan. All rights reserved.</p>
     </div>
   </footer>
 );

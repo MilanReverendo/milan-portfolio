@@ -53,7 +53,7 @@ export default function AboutMe() {
   ];
 
   return (
-    <section className="py-12 bg-gray-50 mb-6 pb-20 mt-4">
+    <section className="py-12 bg-gray-50 pb-20">
       {/* Header Section */}
       <motion.div
         initial={{ opacity: 0, y: -20 }}
