@@ -5,7 +5,7 @@ import DownloadButton from '@/components/DownloadButton';
 
 export default function Internship() {
   return (
-    <section className="py-12 bg-white min-h-screen mt-4 mb-9">
+    <section className="py-12 bg-white min-h-screen">
       {/* Header */}
       <motion.div
         initial={{ opacity: 0, y: -20 }}
