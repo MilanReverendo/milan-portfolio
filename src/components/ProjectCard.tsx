@@ -48,8 +48,6 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ title, description, link, ima
         <Link
           href={link}
           className="inline-block mt-2 text-blue-600 font-medium hover:underline"
-          target="_blank"
-          rel="noopener noreferrer"
         >
           View More &rarr;
         </Link>

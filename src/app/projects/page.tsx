@@ -2,59 +2,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import ProjectCard from '@/components/ProjectCard';
-
-interface Project {
-  title: string;
-  description: string;
-  link: string;
-  imageUrl: string;
-  tags: string[];
-}
-
-const dummyProjects: Project[] = [
-  {
-    title: 'Chatify',
-    description: 'A real-time chat application with rooms, direct messages, and emojis built using Socket.io and React.',
-    link: '#',
-    imageUrl: '/images/test.jpg',
-    tags: ['React', 'Socket.io', 'Node.js'],
-  },
-  {
-    title: 'ShopEase',
-    description: 'An e-commerce platform featuring product listings, shopping cart, and payment integration.',
-    link: '#',
-    imageUrl: '/images/test.jpg',
-    tags: ['Next.js', 'Stripe', 'Tailwind CSS'],
-  },
-  {
-    title: 'FitTrack',
-    description: 'A fitness tracker app that lets users log workouts and monitor progress over time.',
-    link: '#',
-    imageUrl: '/images/test.jpg',
-    tags: ['React Native', 'Expo', 'Firebase'],
-  },
-  {
-    title: 'Weatherly',
-    description: 'A weather dashboard providing forecasts, maps, and alerts using a third-party API.',
-    link: '#',
-    imageUrl: '/images/test.jpg',
-    tags: ['Next.js', 'OpenWeather API', 'Chart.js'],
-  },
-  {
-    title: 'BlogFlow',
-    description: 'A headless CMS-powered blog with markdown support and SEO optimization.',
-    link: '#',
-    imageUrl: '/images/test.jpg',
-    tags: ['Gatsby', 'Contentful', 'GraphQL'],
-  },
-  {
-    title: 'TaskMaster',
-    description: 'A productivity app enabling users to manage tasks, set reminders, and track deadlines.',
-    link: '#',
-    imageUrl: '/images/test.jpg',
-    tags: ['Vue.js', 'Vuetify', 'Firebase'],
-  },
-];
+import { dummyProjects } from '../data/projects';
 
 export default function Projects() {
   return (
