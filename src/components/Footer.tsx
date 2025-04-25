@@ -5,9 +5,9 @@ import { Linkedin, Github, Mail, ArrowUp } from 'lucide-react';
 import Link from 'next/link';
 
 const socialLinks = [
-  { icon: <Linkedin size={18} />, url: 'https://linkedin.com/in/yourprofile', label: 'LinkedIn' },
-  { icon: <Github size={18} />, url: 'https://github.com/yourgithub', label: 'GitHub' },
-  { icon: <Mail size={18} />, url: 'mailto:youremail@example.com', label: 'Email' },
+  { icon: <Linkedin size={18} />, url: 'https://www.linkedin.com/in/milan-reverendo-41ba1829a/', label: 'LinkedIn' },
+  { icon: <Github size={18} />, url: 'https://github.com/MilanReverendo', label: 'GitHub' },
+  { icon: <Mail size={18} />, url: 'mailto:milanreverendo@gmail.com', label: 'Email' },
 ];
 
 const footerVariants = {
@@ -23,48 +23,33 @@ const Footer: React.FC = () => (
       viewport={{ once: true }}
       variants={footerVariants}
       transition={{ duration: 0.6 }}
-      className="container mx-auto px-6 py-4 flex flex-col lg:flex-row justify-between items-center"
+      className="container mx-auto px-6 py-4 flex flex-col items-center space-y-4"
     >
-      {/* Quick Links */}
-      <div className="flex flex-wrap justify-center lg:justify-start gap-6 mb-4 lg:mb-0">
-        <Link href="/" className="text-gray-700 hover:text-blue-600 transition-colors font-medium">
-          Home
-        </Link>
-        <Link href="/about" className="text-gray-700 hover:text-blue-600 transition-colors font-medium">
-          About Me
-        </Link>
-        <Link href="/internship" className="text-gray-700 hover:text-blue-600 transition-colors font-medium">
-          Internship
-        </Link>
-        <Link href="/projects" className="text-gray-700 hover:text-blue-600 transition-colors font-medium">
-          Projects
-        </Link>
+      {/* Social Links */}
+      <div className="flex space-x-4 justify-center">
+        {socialLinks.map(({ icon, url, label }) => (
+          <Link
+            key={label}
+            href={url}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={label}
+            className="text-gray-700 hover:text-blue-600 transition-colors"
+          >
+            {icon}
+          </Link>
+        ))}
+        {/* Back to Top Button */}
+      <button
+        onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+        className="flex items-center text-gray-600 hover:text-blue-600 transition-colors"
+        aria-label="Back to top"
+      >
+        <ArrowUp size={18} className="mr-1" /> Top
+      </button>
       </div>
 
-      {/* Social & Back to Top */}
-      <div className="flex items-center space-x-6">
-        <div className="flex space-x-4">
-          {socialLinks.map(({ icon, url, label }) => (
-            <Link
-              key={label}
-              href={url}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={label}
-              className="text-gray-700 hover:text-blue-600 transition-colors"
-            >
-              {icon}
-            </Link>
-          ))}
-        </div>
-        <button
-          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-          className="flex items-center text-gray-600 hover:text-blue-600 transition-colors"
-          aria-label="Back to top"
-        >
-          <ArrowUp size={18} className="mr-1" /> Top
-        </button>
-      </div>
+      
     </motion.div>
 
     {/* Bottom Bar */}

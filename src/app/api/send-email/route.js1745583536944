@@ -1,20 +1,12 @@
-import { Resend } from 'resend';
+import nodemailer from 'nodemailer';
 
 console.log("API route loaded: /api/send-email");
 export async function POST(request) {
   try {
     // Check environment variables
-    if (!process.env.RESEND_API_KEY) {
-      console.error('Missing environment variable: RESEND_API_KEY');
-      return new Response(JSON.stringify({ error: 'Server configuration error: Missing Resend API key' }), {
-        status: 500,
-        headers: { 'Content-Type': 'application/json' },
-      });
-    }
-
-    if (!process.env.EMAIL_USER) {
-      console.error('Missing environment variable: EMAIL_USER');
-      return new Response(JSON.stringify({ error: 'Server configuration error: Missing email address' }), {
+    if (!process.env.EMAIL_USER || !process.env.EMAIL_PASS) {
+      console.error('Missing environment variables: EMAIL_USER or EMAIL_PASS');
+      return new Response(JSON.stringify({ error: 'Server configuration error: Missing email credentials' }), {
         status: 500,
         headers: { 'Content-Type': 'application/json' },
       });
@@ -32,13 +24,25 @@ export async function POST(request) {
       });
     }
 
-    // Initialize Resend client
-    const resend = new Resend(process.env.RESEND_API_KEY);
+    // Create Nodemailer transporter
+    const transporter = nodemailer.createTransport({
+      host: 'smtp.gmail.com',
+      port: 465,
+      secure: true, // true for 465, false for other ports
+      auth: {
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS,
+      },
+    });
 
-    // Send the email
-    const { data, error } = await resend.emails.send({
-      from: `Contact Form <${process.env.EMAIL_USER}>`,
-      to: [process.env.EMAIL_USER],
+    // Verify transporter connection
+    await transporter.verify();
+    console.log('Transporter verified successfully');
+
+    // Define email options
+    const mailOptions = {
+      from: `"Contact Form" <${process.env.EMAIL_USER}>`,
+      to: process.env.EMAIL_USER,
       subject: `New Contact Form Submission from ${name}`,
       text: `
         Name: ${name}
@@ -51,14 +55,11 @@ export async function POST(request) {
         <p><strong>Email:</strong> ${email}</p>
         <p><strong>Message:</strong> ${message}</p>
       `,
-    });
+    };
 
-    if (error) {
-      console.error('Resend error:', error);
-      throw new Error(error.message);
-    }
-
-    console.log('Email sent successfully:', data.id);
+    // Send the email
+    const info = await transporter.sendMail(mailOptions);
+    console.log('Email sent successfully:', info.messageId);
 
     return new Response(JSON.stringify({ message: 'Email sent successfully' }), {
       status: 200,

@@ -39,19 +39,19 @@ export default function HomePage() {
 
   const highlights: Highlight[] = [
     {
-      title: "Creative Solutions",
+      title: "Passion for IT",
       description:
-        "I specialize in building creative, functional, and visually stunning applications that solve real-world problems.",
+        "Since I was young I have been fascinated by technology and its potential to change the world. As a young teen I started experimenting myself!",
     },
     {
-      title: "Tech Expertise",
+      title: "Collaborative Spirit",
       description:
-        "With proficiency in modern frameworks like React, Next.js, and Tailwind CSS, I deliver top-notch solutions.",
+        "I love working together with others to achieve a common goal. I believe that teamwork leads to the best results.",
     },
     {
       title: "Continuous Growth",
       description:
-        "Always learning and exploring new technologies to stay ahead in this fast-evolving industry.",
+        "I love learning and trying new technologies. I am always looking for new challenges to expand my experience.",
     },
   ];
 
@@ -83,7 +83,7 @@ export default function HomePage() {
             className="relative w-[120px] h-[120px] sm:w-[150px] sm:h-[150px] flex-shrink-0"
           >
             <Image
-              src="/images/test.jpg"
+              src="/images/profiel.jpg"
               alt="Milan's Profile Picture"
               width={150}
               height={150}
@@ -100,7 +100,7 @@ export default function HomePage() {
               <div className="absolute inset-0 bg-black bg-opacity-5 rounded-full" />
               <div className="relative flex space-x-4">
                 <motion.a
-                  href="https://www.linkedin.com/in/your-linkedin-profile" // Replace with your LinkedIn URL
+                  href="https://www.linkedin.com/in/milan-reverendo-41ba1829a/" 
                   target="_blank"
                   rel="noopener noreferrer"
                   variants={iconVariants}
@@ -109,7 +109,7 @@ export default function HomePage() {
                   <Linkedin className="w-6 h-6" />
                 </motion.a>
                 <motion.a
-                  href="https://github.com/your-github-profile" // Replace with your GitHub URL
+                  href="https://github.com/MilanReverendo"
                   target="_blank"
                   rel="noopener noreferrer"
                   variants={iconVariants}
@@ -118,7 +118,7 @@ export default function HomePage() {
                   <Github className="w-6 h-6" />
                 </motion.a>
                 <motion.a
-                  href="mailto:your.email@example.com" // Replace with your email address
+                  href="mailto:milanreverendo@gmail.com"
                   variants={iconVariants}
                   className="text-white hover:text-yellow-500"
                 >
@@ -135,7 +135,14 @@ export default function HomePage() {
               Balancing the art of coding and learning, I build meaningful digital experiences while
               sharpening my skills as a student.
             </p>
-            <div className="flex justify-center space-x-3">
+            {/* Explanation Section */}
+            <p className="text-sm sm:text-base text-gray-600 leading-relaxed mb-6">
+              Welcome to my portfolio! This website showcases my journey as a developer and student,
+              highlighting the projects, skills, and values that define my work. From collaborative
+              endeavors to individual challenges, this portfolio represents my passion for technology,
+              continuous growth, and problem-solving. Take a look around and get to know me better!
+            </p>
+            <div className="flex justify-center sm:justify-center space-x-3">
               <Link
                 href="/projects"
                 className="flex items-center space-x-2 bg-gradient-to-r from-yellow-500 to-orange-500 text-white py-2 px-5 rounded-lg font-medium shadow-md hover:from-yellow-600 hover:to-orange-600 focus:outline-none focus:ring-4 focus:ring-yellow-300 transition-all text-sm sm:text-base"
@@ -161,6 +168,7 @@ export default function HomePage() {
         </div>
       </motion.div>
 
+
       {/* Highlights Section */}
       <div className="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 px-4 mb-12">
         {highlights.map((highlight, index) => (
@@ -182,7 +190,7 @@ export default function HomePage() {
       <div className="container mx-auto text-center mb-12 px-4">
         <h2 className="text-2xl font-bold mb-4 sm:text-3xl">Portfolio Highlights</h2>
         <p className="text-base font-light mb-6 sm:text-lg">
-          Here are some of my recent projects that showcase my skills and expertise.
+          Here are some of the projects I have realised in the past.
         </p>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {randomProjects.map((project, index) => (
@@ -226,8 +234,7 @@ export default function HomePage() {
         >
           <h2 className="text-2xl font-bold mb-3 sm:text-3xl">Contact Me!</h2>
           <p className="text-base font-light mb-6 sm:text-lg">
-            Looking for innovative solutions or a passionate developer for your next project?
-            Let&apos;s make it happen together.
+            Want to contact me? I would love to hear from you!
           </p>
           <Link
             href="/contact"

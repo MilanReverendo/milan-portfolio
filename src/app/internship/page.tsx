@@ -29,15 +29,10 @@ export default function Internship() {
         >
           <h2 className="text-xl font-semibold text-gray-800 sm:text-2xl">About the Company</h2>
           <p className="text-gray-600 text-sm leading-relaxed sm:text-base">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. The company, headquartered in
-            a bustling city, specializes in cutting-edge technology solutions for enterprises.
-            Their focus is on delivering exceptional value through innovation and customer-centric
-            services.
-          </p>
-          <p className="text-gray-600 text-sm leading-relaxed sm:text-base">
-            They have a diverse portfolio of projects ranging from AI-driven applications to cloud
-            infrastructure management. With a team of skilled professionals, the company has
-            established itself as a leader in its domain.
+          Remmicom has established itself as a leading provider of innovative IT solutions tailored for Flemish local governments, serving over 200 small, medium, and large administrations across Flanders.
+          Specializing in user-friendly software and hardware solutions, Remmicom supports municipalities and public welfare organizations with back-office systems, infrastructure, and cloud-based technologies. With a commitment to innovation,
+          the company collaborates closely with the Flemish government to drive digital transformation, enhancing citizen services through platforms like Mijn Burgerprofiel. Known for its personalized approach, exceptional customer service, 
+          and flexible solutions, Remmicom employs over 100 professionals and maintains a strong focus on employee well-being, work-life balance, and continuous growth, ensuring its position as a trusted partner in public sector IT.
           </p>
         </motion.div>
 
@@ -49,7 +44,7 @@ export default function Internship() {
           className="flex justify-center"
         >
           <img
-            src="/images/company_building.png"
+            src="/images/remmicom_logo.jpg"
             alt="Company Building"
             className="rounded-lg shadow-lg max-h-48 object-cover w-full sm:max-h-56"
           />
