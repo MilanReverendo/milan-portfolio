@@ -227,7 +227,7 @@ export default function HomePage() {
           <h2 className="text-2xl font-bold mb-3 sm:text-3xl">Contact Me!</h2>
           <p className="text-base font-light mb-6 sm:text-lg">
             Looking for innovative solutions or a passionate developer for your next project?
-            Let's make it happen together.
+            Let&apos;s make it happen together.
           </p>
           <Link
             href="/contact"
