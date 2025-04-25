@@ -107,10 +107,10 @@ export default function AboutMe() {
         >
           <h2 className="text-xl font-semibold text-gray-800 sm:text-2xl">Who I Am</h2>
           <p className="text-gray-600 text-sm leading-relaxed sm:text-base">
-            I'm a passionate and curious individual with a deep love for technology and creativity. As someone who thrives on solving problems, I find joy in building web applications that are not only functional but also intuitive and visually captivating. My journey in tech has been driven by a relentless curiosity and a desire to create meaningful digital experiences that make a difference.
+            I&apos;m a passionate and curious individual with a deep love for technology and creativity. As someone who thrives on solving problems, I find joy in building web applications that are not only functional but also intuitive and visually captivating. My journey in tech has been driven by a relentless curiosity and a desire to create meaningful digital experiences that make a difference.
           </p>
           <p className="text-gray-600 text-sm leading-relaxed sm:text-base">
-            Beyond coding, I’m someone who values balance and growth. I’m an avid learner, always diving into new hobbies or exploring the outdoors to recharge. Whether it’s practicing Chiro to stay grounded, hiking through nature’s trails, or losing myself in the immersive worlds of gaming, I find inspiration in both the physical and digital realms. I believe in staying connected to my community, contributing to open-source projects, and sharing my knowledge to help others grow.
+            Beyond coding, I&apos;m someone who values balance and growth. I&apos;m an avid learner, always diving into new hobbies or exploring the outdoors to recharge. Whether it’s practicing Chiro to stay grounded, hiking through nature’s trails, or losing myself in the immersive worlds of gaming, I find inspiration in both the physical and digital realms. I believe in staying connected to my community, contributing to open-source projects, and sharing my knowledge to help others grow.
           </p>
         </motion.article>
         <motion.article
