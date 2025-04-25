@@ -16,18 +16,18 @@ interface Project {
 
 export const dummyProjects: Project[] = [
     {
-        title: 'Chatify',
-        description: 'A real-time chat application with rooms, direct messages, and emojis built using Socket.io and React.',
-        link: '/projects/chatify',
-        imageUrl: '/images/test.jpg',
-        tags: ['React', 'Socket.io', 'Node.js'],
-        slug: 'chatify',
+        title: 'Festival Application',
+        description: 'An application for managing festival schedules, ticket sales, and user interactions.',
+        link: '/projects/festival-app',
+        imageUrl: '/images/festival.jpg',
+        tags: ['Angular', '.NET', 'TypeScript'],
+        slug: 'festival-app',
         features: [
             'Real-time messaging',
             'Customizable chat rooms',
             'Emoji support for messages',
         ],
-        technologies: 'Built with React for the frontend, Socket.io for real-time communication, and Node.js for the backend.',
+        technologies: 'The frontend was built with Angular, while the backend was developed using .NET Core.',
         challenges: 'Handling real-time communication and maintaining synchronization across multiple users simultaneously.',
         screenshots: ['/images/chatify1.jpg', '/images/chatify2.jpg'],
         lessonsLearned: 'Gained deep insights into WebSocket technology and state management in real-time applications. Learned to optimize performance for low-latency communication.',
@@ -35,12 +35,12 @@ export const dummyProjects: Project[] = [
         futureImprovements: 'Add end-to-end encryption for messages and integrate video call functionality to enhance user interaction.'
     },
     {
-        title: 'ShopEase',
-        description: 'An e-commerce platform featuring product listings, shopping cart, and payment integration.',
-        link: '/projects/shopease',
-        imageUrl: '/images/test.jpg',
-        tags: ['Next.js', 'Stripe', 'Tailwind CSS'],
-        slug: 'shopease',
+        title: "Duffalo's Soccer App",
+        description: 'An app for a soccer club to manage players, players statistics, match schedules, and much more.',
+        link: '/projects/duffalo',
+        imageUrl: '/images/laravel.jpg',
+        tags: ['Laravel', 'PHP', 'Tailwind CSS'],
+        slug: 'duffalo',
         features: [
             'Secure payment gateway integration',
             'Product search and filters',

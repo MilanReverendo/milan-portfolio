@@ -39,6 +39,8 @@ export default function ContactPage() {
       setIsSubmitting(false);
     }
   };
+  console.log('RESEND_API_KEY:', process.env.RESEND_API_KEY);
+  console.log('EMAIL_USER:', process.env.EMAIL_USER);
 
   return (
     <section className="bg-white text-gray-800 py-16 min-h-screen">
