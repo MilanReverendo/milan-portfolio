@@ -6,7 +6,7 @@ import DownloadButton from "@/components/DownloadButton";
 import SkillCard from "@/components/SkillCard";
 import HobbyCard from "@/components/HobbyCard";
 import { SiTypescript, SiNextdotjs, SiTailwindcss, SiAngular, SiDotnet, SiPostgresql } from "react-icons/si";
-import { FaReact, FaJava, FaGamepad, FaCamera, FaBook } from "react-icons/fa";
+import { FaReact, FaJava, FaGamepad, FaCamera } from "react-icons/fa";
 import { GiHiking } from "react-icons/gi";
 
 interface Skill {
@@ -89,9 +89,6 @@ export default function AboutMe() {
               width={350}
               height={350}
               className="relative rounded-full shadow-xl object-cover border-4 border-white"
-              onError={(e) => {
-                console.error("Failed to load image at /images/milan_profile.jpg. Ensure the file exists in public/images/ and is a valid image.");
-              }}
             />
           </motion.div>
         </motion.div>
