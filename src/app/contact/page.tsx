@@ -55,7 +55,7 @@ export default function ContactPage() {
           Get in <span className="text-yellow-500">Touch</span>
         </h1>
         <p className="text-base font-light sm:text-lg">
-          Have a question, a project in mind, or just want to say hi? I'd love to hear from you!
+          Have a question, a project in mind, or just want to say hi? I&apos;d love to hear from you!
         </p>
       </motion.div>
       {/* Form */}

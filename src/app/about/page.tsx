@@ -91,9 +91,6 @@ export default function AboutMe() {
               width={350}
               height={350}
               className="relative rounded-full shadow-xl object-cover border-4 border-white"
-              onError={(e) => {
-                console.error("Failed to load image at /images/milan_profile.jpg. Ensure the file exists in public/images/ and is a valid image.");
-              }}
             />
           </motion.div>
         </motion.div>

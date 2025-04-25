@@ -2,6 +2,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import DownloadButton from '@/components/DownloadButton';
+import Image from 'next/image';
 
 export default function Internship() {
   return (
@@ -121,16 +122,21 @@ export default function Internship() {
             transition={{ duration: 0.6 }}
             className="flex flex-col space-y-3"
           >
-            <img
+            <Image
               src="/images/project_screenshot1.png"
               alt="Project Screenshot 1"
+              width={800}
+              height={400}
               className="rounded-lg shadow-md object-cover h-40 w-full sm:h-44"
             />
-            <img
+            <Image
               src="/images/project_screenshot2.png"
               alt="Project Screenshot 2"
+              width={800}
+              height={400}
               className="rounded-lg shadow-md object-cover h-40 w-full sm:h-44"
             />
+
           </motion.div>
         </div>
       </div>
