@@ -1,16 +1,16 @@
 "use client";
-import { dummyProjects } from '../../data/projects';
-import Image from 'next/image';
-import { use } from 'react';
-import { motion } from 'framer-motion';
-import { useInView } from 'framer-motion';
-import { useRef } from 'react';
+
+import { dummyProjects } from "../../data/projects";
+import Image from "next/image";
+import { use } from "react";
+import { motion, useInView } from "framer-motion";
+import { useRef } from "react";
 
 interface ProjectDetailProps {
   params: Promise<{ slug: string }>;
 }
 
-// Animation variants for different elements
+// Animation variants
 const containerVariants = {
   hidden: { opacity: 0 },
   visible: {
@@ -35,50 +35,38 @@ const imageVariants = {
   visible: {
     opacity: 1,
     scale: 1,
-    transition: { duration: 0.6, ease: 'easeOut' },
+    transition: { duration: 0.6, ease: "easeOut" },
   },
 };
 
 const buttonVariants = {
-  hover: { scale: 1.05, boxShadow: '0px 5px 15px rgba(0, 0, 0, 0.2)' },
+  hover: { scale: 1.05, boxShadow: "0px 5px 15px rgba(0, 0, 0, 0.2)" },
   tap: { scale: 0.95 },
 };
 
 export default function ProjectDetail({ params }: ProjectDetailProps) {
   const { slug } = use(params);
-
   const project = dummyProjects.find((p) => p.slug === slug);
 
-  const featuresRef = useRef(null);
-  const techRef = useRef(null);
-  const challengesRef = useRef(null);
-  const lessonsRef = useRef(null);
-  const impactRef = useRef(null);
-  const futureRef = useRef(null);
-  const galleryRef = useRef(null);
-
-  const isFeaturesInView = useInView(featuresRef, { once: true, margin: '-50px' });
-  const isTechInView = useInView(techRef, { once: true, margin: '-50px' });
-  const isChallengesInView = useInView(challengesRef, { once: true, margin: '-50px' });
-  const isLessonsInView = useInView(lessonsRef, { once: true, margin: '-50px' });
-  const isImpactInView = useInView(impactRef, { once: true, margin: '-50px' });
-  const isFutureInView = useInView(futureRef, { once: true, margin: '-50px' });
-  const isGalleryInView = useInView(galleryRef, { once: true, margin: '-50px' });
+  // Ref for scroll-based animations
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   if (!project) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <p className="text-gray-600 text-xl">Project not found.</p>
+      <div className="min-h-screen flex items-center justify-center bg-gray-50">
+        <p className="text-gray-600 text-xl font-medium">Project not found.</p>
       </div>
     );
   }
 
   return (
-    <section className="py-12 bg-gray-100 min-h-screen mt-6 mb-9">
-      <div className="container mx-auto px-6">
+    <section className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100 py-12">
+      <div className="container mx-auto px-6 lg:px-12" ref={ref}>
+        {/* Back Button */}
         <motion.button
           onClick={() => window.history.back()}
-          className="mb-6 px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-lg shadow-md flex items-center gap-2"
+          className="mb-8 flex items-center gap-2 rounded-lg bg-gradient-to-r from-blue-600 to-purple-600 px-6 py-3 text-white shadow-lg transition-colors hover:from-blue-700 hover:to-purple-700"
           variants={buttonVariants}
           whileHover="hover"
           whileTap="tap"
@@ -87,188 +75,196 @@ export default function ProjectDetail({ params }: ProjectDetailProps) {
           transition={{ duration: 0.4 }}
         >
           <svg
-            xmlns="http://www.w3.org/2000/svg"
+            className="h-5 w-5"
             fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth={2}
             stroke="currentColor"
-            className="w-5 h-5"
+            viewBox="0 0 24 24"
           >
             <path
               strokeLinecap="round"
               strokeLinejoin="round"
-              d="M10 19l-7-7m0 0l7-7m-7 7h18"
+              strokeWidth="2"
+              d="M15 19l-7-7 7-7"
             />
           </svg>
-          Go Back
+          Back to Projects
         </motion.button>
 
+        {/* Hero Section */}
         <motion.div
-          className="mb-8"
+          className="mb-12 text-center"
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, ease: 'easeOut' }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
         >
-          <h1 className="text-5xl font-bold text-gray-800">{project.title}</h1>
-          <p className="mt-4 text-lg text-gray-600">{project.description}</p>
+          <h1 className="text-4xl font-bold text-gray-800 md:text-5xl">
+            {project.title}
+          </h1>
+          <p className="mt-4 text-lg text-gray-600 md:text-xl">
+            {project.description}
+          </p>
+          {project.projectUrl && (
+            <a
+              href={project.projectUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-4 inline-block rounded-lg bg-blue-600 px-6 py-3 text-white shadow-md transition-colors hover:bg-blue-700"
+            >
+              Visit Project
+            </a>
+          )}
         </motion.div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          <motion.div variants={imageVariants} initial="hidden" animate="visible">
+        {/* Main Content */}
+        <motion.div
+          className="grid grid-cols-1 gap-12 lg:grid-cols-2"
+          variants={containerVariants}
+          initial="hidden"
+          animate={isInView ? "visible" : "hidden"}
+        >
+          {/* Project Image */}
+          <motion.div variants={imageVariants}>
             <Image
               src={project.imageUrl}
               alt={project.title}
               width={800}
               height={500}
-              className="rounded-lg shadow-lg"
+              className="h-auto w-full rounded-lg shadow-xl"
             />
           </motion.div>
-          <motion.div
-            variants={containerVariants}
-            initial="hidden"
-            animate="visible"
-          >
-            <div ref={featuresRef}>
-              <motion.h2
-                className="text-2xl font-semibold mb-4"
-                variants={itemVariants}
-                animate={isFeaturesInView ? 'visible' : 'hidden'}
-              >
-                Features
-              </motion.h2>
-              <motion.ul
-                className="list-disc list-inside text-gray-700 mb-8"
-                variants={containerVariants}
-                animate={isFeaturesInView ? 'visible' : 'hidden'}
-              >
-                {project.features.map((feature, index) => (
-                  <motion.li key={index} variants={itemVariants}>
-                    {feature}
-                  </motion.li>
-                ))}
-              </motion.ul>
-            </div>
 
-            <div ref={techRef}>
-              <motion.h2
-                className="text-2xl font-semibold mb-4"
-                variants={itemVariants}
-                animate={isTechInView ? 'visible' : 'hidden'}
-              >
-                Technologies
-              </motion.h2>
-              <motion.p
-                className="text-gray-700 mb-8"
-                variants={itemVariants}
-                animate={isTechInView ? 'visible' : 'hidden'}
-              >
-                {project.technologies}
-              </motion.p>
-            </div>
-
-            <div ref={challengesRef}>
-              <motion.h2
-                className="text-2xl font-semibold mb-4"
-                variants={itemVariants}
-                animate={isChallengesInView ? 'visible' : 'hidden'}
-              >
-                Challenges
-              </motion.h2>
-              <motion.p
-                className="text-gray-700 mb-8"
-                variants={itemVariants}
-                animate={isChallengesInView ? 'visible' : 'hidden'}
-              >
-                {project.challenges}
-              </motion.p>
-            </div>
-
-            <div ref={lessonsRef}>
-              <motion.h2
-                className="text-2xl font-semibold mb-4"
-                variants={itemVariants}
-                animate={isLessonsInView ? 'visible' : 'hidden'}
-              >
-                Lessons Learned
-              </motion.h2>
-              <motion.p
-                className="text-gray-700 mb-8"
-                variants={itemVariants}
-                animate={isLessonsInView ? 'visible' : 'hidden'}
-              >
-                {project.lessonsLearned}
-              </motion.p>
-            </div>
-
-            <div ref={impactRef}>
-              <motion.h2
-                className="text-2xl font-semibold mb-4"
-                variants={itemVariants}
-                animate={isImpactInView ? 'visible' : 'hidden'}
-              >
-                Impact
-              </motion.h2>
-              <motion.p
-                className="text-gray-700 mb-8"
-                variants={itemVariants}
-                animate={isImpactInView ? 'visible' : 'hidden'}
-              >
-                {project.impact}
-              </motion.p>
-            </div>
-
-            <div ref={futureRef}>
-              <motion.h2
-                className="text-2xl font-semibold mb-4"
-                variants={itemVariants}
-                animate={isFutureInView ? 'visible' : 'hidden'}
-              >
-                Future Improvements
-              </motion.h2>
-              <motion.p
-                className="text-gray-700"
-                variants={itemVariants}
-                animate={isFutureInView ? 'visible' : 'hidden'}
-              >
-                {project.futureImprovements}
-              </motion.p>
-            </div>
-          </motion.div>
-        </div>
-
-        {project.screenshots.length > 0 && (
-          <div className="mt-12" ref={galleryRef}>
+          {/* Project Details */}
+          <motion.div variants={containerVariants}>
             <motion.h2
-              className="text-3xl font-semibold mb-6"
+              className="mb-4 text-2xl font-semibold text-gray-800"
               variants={itemVariants}
-              animate={isGalleryInView ? 'visible' : 'hidden'}
             >
-              Gallery
+              Tech Stack Reasoning
+            </motion.h2>
+            <motion.p
+              className="mb-6 text-gray-600"
+              variants={itemVariants}
+            >
+              {project.techStackReason || "No tech stack reasoning provided."}
+            </motion.p>
+
+            <motion.h2
+              className="mb-4 text-2xl font-semibold text-gray-800"
+              variants={itemVariants}
+            >
+              Technologies Used
+            </motion.h2>
+            <motion.p
+              className="mb-6 text-gray-600"
+              variants={itemVariants}
+            >
+              {project.technologies}
+            </motion.p>
+
+            <motion.h2
+              className="mb-4 text-2xl font-semibold text-gray-800"
+              variants={itemVariants}
+            >
+              Tags
             </motion.h2>
             <motion.div
-              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
-              variants={containerVariants}
-              animate={isGalleryInView ? 'visible' : 'hidden'}
+              className="mb-6 flex flex-wrap gap-2"
+              variants={itemVariants}
             >
-              {project.screenshots.map((screenshot, index) => (
-                <motion.div
+              {project.tags.map((tag, index) => (
+                <span
                   key={index}
-                  variants={imageVariants}
-                  whileHover={{ scale: 1.05, boxShadow: '0px 5px 15px rgba(0, 0, 0, 0.2)' }}
-                  whileTap={{ scale: 0.95 }}
+                  className="rounded-full bg-blue-100 px-3 py-1 text-sm text-blue-800"
                 >
-                  <Image
-                    src={screenshot}
-                    alt={`${project.title} screenshot ${index + 1}`}
-                    width={400}
-                    height={250}
-                    className="rounded-lg shadow-md"
-                  />
-                </motion.div>
+                  {tag}
+                </span>
               ))}
             </motion.div>
-          </div>
-        )}
+          </motion.div>
+        </motion.div>
+
+        {/* Additional Sections */}
+        <motion.div
+          className="mt-12 grid grid-cols-1 gap-12"
+          variants={containerVariants}
+          initial="hidden"
+          animate={isInView ? "visible" : "hidden"}
+        >
+          {/* Features */}
+          <motion.div variants={itemVariants}>
+            <h2 className="mb-4 text-2xl font-semibold text-gray-800">
+              Key Features
+            </h2>
+            <ul className="list-disc space-y-2 pl-6 text-gray-600">
+              {project.features.map((feature, index) => (
+                <li key={index}>{feature}</li>
+              ))}
+            </ul>
+          </motion.div>
+
+          {/* Challenges */}
+          <motion.div variants={itemVariants}>
+            <h2 className="mb-4 text-2xl font-semibold text-gray-800">
+              Challenges Faced
+            </h2>
+            <p className="text-gray-600">{project.challenges}</p>
+          </motion.div>
+
+          {/* Screenshots */}
+          {project.screenshots.length > 0 && (
+            <motion.div variants={itemVariants}>
+              <h2 className="mb-4 text-2xl font-semibold text-gray-800">
+                Screenshots
+              </h2>
+              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                {project.screenshots.map((screenshot, index) => (
+                  <Image
+                    key={index}
+                    src={screenshot}
+                    alt={`Screenshot ${index + 1}`}
+                    width={400}
+                    height={300}
+                    className="h-auto w-full rounded-lg shadow-md"
+                  />
+                ))}
+              </div>
+            </motion.div>
+          )}
+
+          {/* Lessons Learned */}
+          <motion.div variants={itemVariants}>
+            <h2 className="mb-4 text-2xl font-semibold text-gray-800">
+              Lessons Learned
+            </h2>
+            <p className="text-gray-600">{project.lessonsLearned}</p>
+          </motion.div>
+
+          {/* Impact */}
+          <motion.div variants={itemVariants}>
+            <h2 className="mb-4 text-2xl font-semibold text-gray-800">
+              Impact
+            </h2>
+            <p className="text-gray-600">{project.impact}</p>
+          </motion.div>
+
+          {/* Future Improvements */}
+          <motion.div variants={itemVariants}>
+            <h2 className="mb-4 text-2xl font-semibold text-gray-800">
+              Future Improvements
+            </h2>
+            <p className="text-gray-600">{project.futureImprovements}</p>
+          </motion.div>
+
+          {/* Additional Details */}
+          {project.details && (
+            <motion.div variants={itemVariants}>
+              <h2 className="mb-4 text-2xl font-semibold text-gray-800">
+                Additional Details
+              </h2>
+              <p className="text-gray-600">{project.details}</p>
+            </motion.div>
+          )}
+        </motion.div>
       </div>
     </section>
   );
