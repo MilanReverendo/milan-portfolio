@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import { motion } from "framer-motion";
+import emailjs from 'emailjs-com';
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({ name: "", email: "", message: "" });
@@ -12,35 +13,35 @@ export default function ContactPage() {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    setStatus("");
 
-    try {
-      const response = await fetch("/api/send-email", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
-      });
 
-      const result = await response.json();
+const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  e.preventDefault();
+  setIsSubmitting(true);
+  setStatus("");
 
-      if (response.ok) {
-        setStatus("success");
-        setFormData({ name: "", email: "", message: "" });
-      } else {
-        setStatus(result.error || "error");
-      }
-    } catch (error) {
-      console.error("Error sending email:", error);
+  try {
+    const result = await emailjs.send(
+      'service_kdltcgr', // Replace with your EmailJS service ID
+      'template_41pmf9c', // Replace with your EmailJS template ID
+      formData,           // Form data to be sent
+      'Hpzv7qND_3KXZufmv'      // Replace with your EmailJS user ID
+    );
+
+    if (result.status === 200) {
+      setStatus("success");
+      setFormData({ name: "", email: "", message: "" });
+    } else {
       setStatus("error");
-    } finally {
-      setIsSubmitting(false);
     }
-  };
-  console.log('RESEND_API_KEY:', process.env.RESEND_API_KEY);
-  console.log('EMAIL_USER:', process.env.EMAIL_USER);
+  } catch (error) {
+    console.error("Error sending email:", error);
+    setStatus("error");
+  } finally {
+    setIsSubmitting(false);
+  }
+};
+
 
   return (
     <section className="bg-white text-gray-800 py-16 min-h-screen">
@@ -140,14 +141,14 @@ export default function ContactPage() {
           </p>
           <div className="flex justify-center space-x-4">
             <a
-              href="mailto:your-email@example.com"
+              href="mailto:milanreverendo@gmail.com"
               className="text-yellow-500 hover:underline"
             >
               Email Me
             </a>
             <span>|</span>
             <a
-              href="https://www.linkedin.com/in/your-profile"
+              href="https://www.linkedin.com/in/milan-reverendo-41ba1829a/"
               className="text-yellow-500 hover:underline"
               target="_blank"
               rel="noopener noreferrer"
@@ -156,7 +157,7 @@ export default function ContactPage() {
             </a>
             <span>|</span>
             <a
-              href="https://github.com/your-profile"
+              href="https://github.com/MilanReverendo"
               className="text-yellow-500 hover:underline"
               target="_blank"
               rel="noopener noreferrer"
