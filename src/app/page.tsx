@@ -2,7 +2,7 @@
 import React, { useState, useEffect, JSX } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { ArrowRight, FileText, Eye, Linkedin, Github, Mail, Code, Rocket, BookOpen } from "lucide-react";
+import { ArrowRight, FileText, Eye, Code, Rocket, BookOpen } from "lucide-react";
 import Image from "next/image";
 import { dummyProjects } from "./data/projects";
 
@@ -13,15 +13,6 @@ const profileVariants = {
   hover: { scale: 1.05, boxShadow: "0px 8px 20px rgba(0, 0, 0, 0.1)" },
 };
 
-const iconContainerVariants = {
-  hidden: { opacity: 0 },
-  visible: { opacity: 1, transition: { staggerChildren: 0.1 } },
-};
-
-const iconVariants = {
-  hidden: { opacity: 0, y: 10 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.3 } },
-};
 
 const cardVariants = {
   hidden: { opacity: 0, y: 20 },

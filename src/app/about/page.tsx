@@ -110,7 +110,7 @@ export default function OverMij() {
                 Ik maak moderne webapplicaties met een focus op gebruiksvriendelijkheid en schaalbaarheid. Met frameworks als React en Node.js experimenteer ik graag met nieuwe technologieën, van AI-interfaces tot decentrale weboplossingen.
               </p>
               <p className="text-gray-600 leading-relaxed">
-                In mijn vrije tijd beoefen ik enkele hobby's die mij inspireren en ontspannen. Of het nu gaat om het spelen van games, het begeleiden van jongeren in de Chiro, of het genieten van de natuur tijdens een wandeling, ik geloof dat deze ervaringen mijn creativiteit en probleemoplossend vermogen versterken. Ik leer ook graag op mezelf bij binnen IT.
+                In mijn vrije tijd beoefen ik enkele hobby&apos;s die mij inspireren en ontspannen. Of het nu gaat om het spelen van games, het begeleiden van jongeren in de Chiro, of het genieten van de natuur tijdens een wandeling, ik geloof dat deze ervaringen mijn creativiteit en probleemoplossend vermogen versterken. Ik leer ook graag op mezelf bij binnen IT.
               </p>
             </motion.article>
 
@@ -163,7 +163,7 @@ export default function OverMij() {
           transition={{ duration: 0.6 }}
           className="text-center mb-6"
         >
-          <h2 className="text-2xl font-semibold">Hobby's & vrije tijd</h2>
+          <h2 className="text-2xl font-semibold">Hobby&apos;s & vrije tijd</h2>
           <p className="text-gray-600">Activiteiten die mij inspireren en ontspannen.</p>
         </motion.div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">

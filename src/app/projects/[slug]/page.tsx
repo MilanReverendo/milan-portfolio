@@ -4,7 +4,7 @@ import React, { ReactNode } from 'react';
 import { use } from 'react';
 import { motion, useInView } from 'framer-motion';
 import Image from 'next/image';
-import { dummyProjects, Project } from '../../data/projects';
+import { dummyProjects } from '../../data/projects';
 import { useRef } from 'react';
 
 interface ProjectDetailProps {
