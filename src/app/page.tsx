@@ -108,7 +108,7 @@ export default function HomePage() {
               >
                 <Image
                   src="/images/profiel.jpg"
-                  alt="Milan's Profile Picture"
+                  alt="Milan&apos;s Profile Picture"
                   width={200}
                   height={200}
                   className="w-full h-full object-cover rounded-2xl shadow-xl"
@@ -156,7 +156,7 @@ export default function HomePage() {
                 Developer & Student
               </div>
               <h1 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-amber-600 to-orange-600 bg-clip-text text-transparent">
-                Hi, I'm Milan
+                Hi, I&apos;m Milan
               </h1>
               <p className="text-lg md:text-xl text-gray-700 mb-6 leading-relaxed">
                 Balancing the art of coding and learning, I build meaningful digital experiences while
@@ -318,7 +318,7 @@ export default function HomePage() {
           >
             <h2 className="text-3xl font-bold mb-4">Ready to Work Together?</h2>
             <p className="text-gray-600 mb-8">
-              I'm always open to discussing new projects, creative ideas or opportunities to be part of your vision.
+              I&apos;m always open to discussing new projects, creative ideas or opportunities to be part of your vision.
             </p>
             <Link
               href="/contact"
