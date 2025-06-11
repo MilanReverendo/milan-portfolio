@@ -49,7 +49,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ title, description, link, ima
           href={link}
           className="inline-block mt-2 text-blue-600 font-medium hover:underline"
         >
-          View More &rarr;
+          Meer Info &rarr;
         </Link>
       </div>
     </motion.div>
