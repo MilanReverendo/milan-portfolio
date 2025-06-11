@@ -6,14 +6,13 @@ import { ArrowRight, FileText, Eye, Linkedin, Github, Mail, Code, Rocket, BookOp
 import Image from "next/image";
 import { dummyProjects } from "./data/projects";
 
-// Animation variants for profile picture
+// Animaties voor afbeeldingen en kaarten
 const profileVariants = {
   hidden: { opacity: 0, scale: 0.8 },
   visible: { opacity: 1, scale: 1, transition: { duration: 0.6, ease: "easeOut" } },
-  hover: { scale: 1.05, boxShadow: "0px 8px 20px rgba(0, 0, 0, 0.2)" },
+  hover: { scale: 1.05, boxShadow: "0px 8px 20px rgba(0, 0, 0, 0.1)" },
 };
 
-// Animation variants for social icons
 const iconContainerVariants = {
   hidden: { opacity: 0 },
   visible: { opacity: 1, transition: { staggerChildren: 0.1 } },
@@ -24,25 +23,23 @@ const iconVariants = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.3 } },
 };
 
-// Animation variants for project cards
 const cardVariants = {
   hidden: { opacity: 0, y: 20 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
-  hover: { scale: 1.03, boxShadow: "0px 5px 15px rgba(0, 0, 0, 0.1)" },
+  hover: { scale: 1.03, boxShadow: "0px 5px 15px rgba(0, 0, 0, 0.05)" },
 };
 
-// Gradient background for highlight cards
+// Gradients en iconen voor highlights
 const gradients = [
-  "from-blue-50 to-blue-100 border-blue-200",
-  "from-amber-50 to-amber-100 border-amber-200",
-  "from-emerald-50 to-emerald-100 border-emerald-200",
+  "from-gray-50 to-gray-100 border-gray-200",
+  "from-gray-50 to-gray-100 border-gray-200",
+  "from-gray-50 to-gray-100 border-gray-200",
 ];
 
-// Icons for highlight cards
 const highlightIcons = [
-  <Code className="w-8 h-8 text-blue-500" key="code" />,
-  <Rocket className="w-8 h-8 text-amber-500" key="rocket" />,
-  <BookOpen className="w-8 h-8 text-emerald-500" key="book" />,
+  <Code className="w-8 h-8 text-gray-600" key="code" />,  
+  <Rocket className="w-8 h-8 text-gray-600" key="rocket" />,  
+  <BookOpen className="w-8 h-8 text-gray-600" key="book" />,  
 ];
 
 export default function HomePage() {
@@ -54,280 +51,214 @@ export default function HomePage() {
 
   const highlights: Highlight[] = [
     {
-      title: "Passion for IT",
+      title: "Passie voor IT",
       description:
-        "Since I was young I have been fascinated by technology and its potential to change the world. As a young teen I started experimenting myself!",
+        "Sinds mijn jeugd ben ik gefascineerd door technologie en de mogelijkheden om de wereld te verbeteren.",
     },
     {
-      title: "Collaborative Spirit",
+      title: "Samenwerkingsgericht",
       description:
-        "I love working together with others to achieve a common goal. I believe that teamwork leads to the best results.",
+        "Ik werk graag samen om gezamenlijke doelen te bereiken; teamwerk levert de beste resultaten.",
     },
     {
-      title: "Continuous Growth",
+      title: "Continu groeien",
       description:
-        "I love learning and trying new technologies. I am always looking for new challenges to expand my experience.",
+        "Ik leer constant nieuwe technologieën en zoek uitdagingen om mijn vaardigheden te vergroten.",
     },
   ];
 
-  // Assign icons to highlights
   const highlightsWithIcons = highlights.map((highlight, index) => ({
     ...highlight,
     icon: highlightIcons[index],
   }));
 
-  // Select 3 random projects on the client side to avoid hydration mismatch
   const [randomProjects, setRandomProjects] = useState<typeof dummyProjects>([]);
 
   useEffect(() => {
     const getRandomProjects = (projects: typeof dummyProjects, count: number) => {
-      const shuffled = [...projects].sort(() => 0.5 - Math.random());
-      return shuffled.slice(0, count);
+      return projects.sort(() => 0.5 - Math.random()).slice(0, count);
     };
     setRandomProjects(getRandomProjects(dummyProjects, 3));
   }, []);
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
-      {/* Hero Section with Profile Picture and Social Icons */}
-      <section className="py-16 md:py-24">
+    <div className="min-h-screen bg-gray-50 text-gray-800">
+      {/* Hero */}
+      <section className="py-16">
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1 }}
-          className="container mx-auto px-6"
+          transition={{ duration: 0.8 }}
+          className="container mx-auto px-6 flex flex-col md:flex-row items-center gap-10"
         >
-          <div className="flex flex-col md:flex-row items-center md:items-start gap-8 md:gap-12">
-            <div className="relative">
-              <motion.div
-                variants={profileVariants}
-                initial="hidden"
-                animate="visible"
-                whileHover="hover"
-                className="relative w-40 h-40 md:w-48 md:h-48 overflow-hidden"
+          <motion.div
+            variants={profileVariants}
+            initial="hidden"
+            animate="visible"
+            whileHover="hover"
+            className="w-40 h-40 md:w-48 md:h-48 rounded-xl overflow-hidden border border-gray-200"
+          >
+            <Image
+              src="/images/profiel.jpg"
+              alt="Profielfoto Milan"
+              width={192}
+              height={192}
+              className="object-cover w-full h-full"
+            />
+          </motion.div>
+
+          <div className="max-w-xl">
+            <span className="inline-block bg-amber-100 text-amber-700 text-sm font-semibold px-3 py-1 rounded-full mb-2">
+              Ontwikkelaar & Student
+            </span>
+            <h1 className="text-4xl font-bold mb-4">
+              Hallo, ik ben Milan
+            </h1>
+            <p className="text-lg mb-6">
+              Ik ontwerp betekenisvolle digitale ervaringen terwijl ik mijn vaardigheden als student blijf ontwikkelen.
+            </p>
+
+            <p className="mb-6">
+              Welkom op mijn portfolio! Hier vind je mijn projecten, vaardigheden en waarden die mijn werk vormgeven.
+            </p>
+
+            <div className="flex flex-wrap gap-4">
+              <Link
+                href="/projects"
+                className="flex items-center bg-amber-600 text-white py-2 px-5 rounded-lg font-medium hover:bg-amber-700 transition"
               >
-                <Image
-                  src="/images/profiel.jpg"
-                  alt="Milan&apos;s Profile Picture"
-                  width={200}
-                  height={200}
-                  className="w-full h-full object-cover rounded-2xl shadow-xl"
-                />
-                <motion.div
-                  className="absolute -bottom-1 -right-1 flex space-x-2 bg-white/80 backdrop-blur-sm py-2 px-3 rounded-lg shadow-md"
-                  variants={iconContainerVariants}
-                  initial="hidden"
-                  animate="visible"
-                >
-                  <motion.a
-                    href="https://www.linkedin.com/in/milan-reverendo-41ba1829a/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    variants={iconVariants}
-                    className="text-blue-600 hover:text-blue-800 transition-colors"
-                    aria-label="LinkedIn Profile"
-                  >
-                    <Linkedin className="w-5 h-5" />
-                  </motion.a>
-                  <motion.a
-                    href="https://github.com/MilanReverendo"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    variants={iconVariants}
-                    className="text-gray-800 hover:text-black transition-colors"
-                    aria-label="GitHub Profile"
-                  >
-                    <Github className="w-5 h-5" />
-                  </motion.a>
-                  <motion.a
-                    href="mailto:milanreverendo@gmail.com"
-                    variants={iconVariants}
-                    className="text-red-500 hover:text-red-700 transition-colors"
-                    aria-label="Email Me"
-                  >
-                    <Mail className="w-5 h-5" />
-                  </motion.a>
-                </motion.div>
-              </motion.div>
-            </div>
-            
-            <div className="text-center md:text-left max-w-2xl">
-              <div className="mb-1 inline-block py-1 px-3 rounded-full bg-amber-100 text-amber-800 text-xs font-medium">
-                Developer & Student
-              </div>
-              <h1 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-amber-600 to-orange-600 bg-clip-text text-transparent">
-                Hi, I&apos;m Milan
-              </h1>
-              <p className="text-lg md:text-xl text-gray-700 mb-6 leading-relaxed">
-                Balancing the art of coding and learning, I build meaningful digital experiences while
-                sharpening my skills as a student.
-              </p>
-              
-              {/* Explanation Section */}
-              <div className="bg-white/70 backdrop-blur-sm p-4 rounded-lg border border-gray-100 shadow-sm mb-6">
-                <p className="text-gray-600 leading-relaxed">
-                  Welcome to my portfolio! This website showcases my journey as a developer and student,
-                  highlighting the projects, skills, and values that define my work. From collaborative
-                  endeavors to individual challenges, this portfolio represents my passion for technology,
-                  continuous growth, and problem-solving.
-                </p>
-              </div>
-              
-              <div className="flex flex-wrap justify-center md:justify-start gap-3">
-                <Link
-                  href="/projects"
-                  className="flex items-center space-x-2 bg-gradient-to-r from-amber-500 to-orange-500 text-white py-3 px-6 rounded-lg font-medium shadow-md hover:from-amber-600 hover:to-orange-600 focus:outline-none focus:ring-4 focus:ring-orange-200 transition-all"
-                >
-                  <motion.span whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} className="flex items-center space-x-2">
-                    <Eye className="w-5 h-5" />
-                    <span>View My Projects</span>
-                  </motion.span>
-                </Link>
-                <Link
-                  href="/documents/cv.pdf"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center space-x-2 bg-white text-gray-800 border border-gray-200 py-3 px-6 rounded-lg font-medium shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-4 focus:ring-gray-100 transition-all"
-                >
-                  <motion.span whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} className="flex items-center space-x-2">
-                    <FileText className="w-5 h-5" />
-                    <span>View My CV</span>
-                  </motion.span>
-                </Link>
-              </div>
+                <Eye className="w-5 h-5 mr-2" />
+                Bekijk projecten
+              </Link>
+              <Link
+                href="/documents/cv.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center border border-gray-300 text-gray-700 py-2 px-5 rounded-lg font-medium hover:bg-gray-100 transition"
+              >
+                <FileText className="w-5 h-5 mr-2" />
+                Bekijk CV
+              </Link>
             </div>
           </div>
         </motion.div>
       </section>
 
-      {/* Highlights Section */}
+      {/* Highlights */}
       <section className="py-16 bg-white">
-        <div className="container mx-auto px-6">
-          <div className="text-center mb-12">
-            <motion.h2
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
-              className="text-3xl font-bold"
-            >
-              What Makes Me <span className="text-amber-500">Different</span>
-            </motion.h2>
-            <div className="w-20 h-1 bg-gradient-to-r from-amber-500 to-orange-500 mx-auto mt-4 mb-6 rounded-full"></div>
-          </div>
-          
+        <div className="container mx-auto px-6 text-center">
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="text-3xl font-semibold mb-4"
+          >
+            Wat mij <span className="text-amber-600">onderscheidt</span>
+          </motion.h2>
+          <div className="w-16 h-1 bg-amber-600 mx-auto mb-10 rounded-full"></div>
+
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {highlightsWithIcons.map((highlight, index) => (
+            {highlightsWithIcons.map((h, i) => (
               <motion.div
-                key={index}
+                key={i}
                 initial={{ opacity: 0, scale: 0.9 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                className={`bg-gradient-to-br ${gradients[index]} border rounded-xl shadow-sm p-6 hover:shadow-md transition-shadow`}
+                transition={{ duration: 0.6, delay: i * 0.1 }}
+                className={`p-6 bg-gradient-to-br ${gradients[i]} border rounded-lg text-left`}
               >
-                <div className="flex flex-col items-center">
-                  <div className="mb-4 p-3 bg-white rounded-full shadow-sm">
-                    {highlight.icon}
-                  </div>
-                  <h3 className="text-xl font-semibold mb-3">{highlight.title}</h3>
-                  <p className="text-gray-600 text-center">{highlight.description}</p>
+                <div className="mb-4">
+                  {h.icon}
                 </div>
+                <h3 className="text-xl font-medium mb-2">{h.title}</h3>
+                <p className="text-gray-600">{h.description}</p>
               </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Portfolio Section */}
-      <section className="py-16 bg-gray-50">
-        <div className="container mx-auto px-6">
-          <div className="text-center mb-12">
-            <motion.h2 
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
-              className="text-3xl font-bold"
-            >
-              Portfolio <span className="text-amber-500">Highlights</span>
-            </motion.h2>
-            <div className="w-20 h-1 bg-gradient-to-r from-amber-500 to-orange-500 mx-auto mt-4 mb-6 rounded-full"></div>
-            <p className="text-gray-600 max-w-2xl mx-auto">
-              Here are some of the projects I have realized in the past.
-            </p>
-          </div>
-          
+      {/* Portfolio */}
+      <section className="py-16">
+        <div className="container mx-auto px-6 text-center">
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="text-3xl font-semibold mb-4"
+          >
+            Portfolio <span className="text-amber-600">Hoogtepunten</span>
+          </motion.h2>
+          <p className="text-gray-600 mb-10 max-w-lg mx-auto">
+            Een selectie van projecten die ik recent heb gerealiseerd.
+          </p>
+
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {randomProjects.map((project, index) => (
+            {randomProjects.map((project, idx) => (
               <motion.div
-                key={index}
+                key={idx}
                 variants={cardVariants}
                 initial="hidden"
                 whileInView="visible"
                 whileHover="hover"
                 viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="bg-white rounded-xl overflow-hidden shadow-md flex flex-col h-full"
+                transition={{ duration: 0.5, delay: idx * 0.1 }}
+                className="bg-white rounded-lg overflow-hidden border border-gray-200 flex flex-col h-full"
               >
-                <div className="relative h-48 overflow-hidden">
+                <div className="relative h-48">
                   <Image
                     src={project.imageUrl}
                     alt={project.title}
                     fill
                     className="object-cover"
-                    style={{ objectPosition: "center" }}
                   />
                 </div>
-                <div className="p-6 flex flex-col flex-grow">
-                  <h4 className="text-xl font-semibold mb-3">{project.title}</h4>
+                <div className="p-5 flex flex-col flex-grow">
+                  <h4 className="text-xl font-medium mb-2">{project.title}</h4>
                   <p className="text-gray-600 mb-4 flex-grow">{project.description}</p>
                   <Link
                     href={project.link}
-                    className="inline-flex items-center text-amber-500 hover:text-amber-600 font-medium group"
+                    className="mt-auto inline-flex items-center font-medium text-amber-600 hover:underline"
                   >
-                    <span>Learn More</span>
-                    <ArrowRight className="w-4 h-4 ml-1 transition-transform group-hover:translate-x-1" />
+                    Meer lezen <ArrowRight className="w-4 h-4 ml-1" />
                   </Link>
                 </div>
               </motion.div>
             ))}
           </div>
-          
-          <div className="text-center mt-10">
+
+          <div className="mt-10">
             <Link
               href="/projects"
-              className="inline-flex items-center space-x-2 text-amber-500 hover:text-amber-600 font-medium"
+              className="inline-flex items-center font-medium text-amber-600 hover:underline"
             >
-              <span>View All Projects</span>
-              <ArrowRight className="w-4 h-4" />
+              Bekijk alle projecten <ArrowRight className="w-4 h-4 ml-1" />
             </Link>
           </div>
         </div>
       </section>
 
-      {/* Call to Action Section */}
-      <section className="py-20 bg-gradient-to-br from-amber-50 to-orange-50">
-        <div className="container mx-auto px-6">
+      {/* CTA */}
+      <section className="py-20 bg-amber-50">
+        <div className="container mx-auto px-6 text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="max-w-2xl mx-auto text-center"
+            className="max-w-lg mx-auto"
           >
-            <h2 className="text-3xl font-bold mb-4">Ready to Work Together?</h2>
-            <p className="text-gray-600 mb-8">
-              I&apos;m always open to discussing new projects, creative ideas or opportunities to be part of your vision.
+            <h2 className="text-3xl font-semibold mb-4">Wilt u mij contacteren?</h2>
+            <p className="text-gray-700 mb-6">
+              Via deze knop kunt u eenvoudig een bericht sturen of een vraag stellen.
             </p>
             <Link
               href="/contact"
-              className="inline-flex items-center bg-gradient-to-r from-amber-500 to-orange-500 text-white py-3 px-8 rounded-lg font-medium shadow-md hover:from-amber-600 hover:to-orange-600 focus:outline-none focus:ring-4 focus:ring-orange-200 transition-all"
+              className="inline-flex items-center bg-amber-600 text-white py-2 px-6 rounded-lg font-medium hover:bg-amber-700 transition"
             >
-              <motion.span whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} className="flex items-center space-x-2">
-                <span>Get in Touch</span>
-                <ArrowRight className="w-5 h-5 ml-1" />
-              </motion.span>
+              Neem contact op <ArrowRight className="w-5 h-5 ml-2" />
             </Link>
           </motion.div>
         </div>
