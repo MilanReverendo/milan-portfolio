@@ -1,11 +1,11 @@
-"use client";
+'use client';
 
-import React, { ReactNode } from 'react';
+import React, { ReactNode, useRef } from 'react';
 import { use } from 'react';
 import { motion, useInView } from 'framer-motion';
 import Image from 'next/image';
 import { dummyProjects } from '../../data/projects';
-import { useRef } from 'react';
+import YouTubeEmbed from '@/components/YoutubeEmbed';
 
 interface ProjectDetailProps {
   params: Promise<{ slug: string }>;
@@ -30,6 +30,7 @@ export default function ProjectDetail({ params }: ProjectDetailProps) {
   const project = dummyProjects.find((p) => p.slug === slug);
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: '-100px' });
+
   if (!project) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gray-50">
@@ -37,13 +38,13 @@ export default function ProjectDetail({ params }: ProjectDetailProps) {
       </div>
     );
   }
-  const renderSection = (title: string, content: ReactNode) =>
-    content ? (
-      <motion.div variants={itemVariants} className="mb-8">
-        <h2 className="text-2xl font-semibold mb-4">{title}</h2>
-        {content}
-      </motion.div>
-    ) : null;
+
+  const renderSection = (title: string, content: ReactNode) => (
+    <motion.div variants={itemVariants} className="mb-8">
+      <h2 className="text-2xl font-semibold mb-4">{title}</h2>
+      {content}
+    </motion.div>
+  );
 
   return (
     <section className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100 py-16 text-gray-800">
@@ -104,20 +105,19 @@ export default function ProjectDetail({ params }: ProjectDetailProps) {
 
           <div className="">
             {renderSection('Gebruikte Technologieën', <p className="text-gray-600 mb-4">{project.technologies}</p>)}
-            {renderSection(
-              'Waarom deze Technologieën',
-              <p className="text-gray-600 mb-4">{project.techStackReason || 'Geen toelichting beschikbaar.'}</p>
-            )}
-            {project.tags?.length > 0 && renderSection(
-              'Tags',
-              <div className="flex flex-wrap gap-2 mb-4">
-                {project.tags.map((tag, idx) => (
-                  <span key={idx} className="px-3 py-1 bg-amber-100 rounded-full text-sm text-amber-800">
-                    {tag}
-                  </span>
-                ))}
-              </div>
-            )}
+            {project.techStackReason &&
+              renderSection('Waarom deze Technologieën', <p className="text-gray-600 mb-4">{project.techStackReason}</p>)}
+            {project.tags?.length > 0 &&
+              renderSection(
+                'Tags',
+                <div className="flex flex-wrap gap-2 mb-4">
+                  {project.tags.map((tag, idx) => (
+                    <span key={idx} className="px-3 py-1 bg-amber-100 rounded-full text-sm text-amber-800">
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              )}
           </div>
         </motion.div>
 
@@ -127,16 +127,19 @@ export default function ProjectDetail({ params }: ProjectDetailProps) {
           initial="hidden"
           animate={inView ? 'visible' : 'hidden'}
         >
-          {renderSection(
-            'Belangrijkste Kenmerken',
-            <ul className="list-disc pl-6 space-y-2 text-gray-600">
-              {project.features?.map((f, idx) => <li key={idx}>{f}</li>)}
-            </ul>
-          )}
+          {project.features?.length > 0 &&
+            renderSection(
+              'Belangrijkste Kenmerken',
+              <ul className="list-disc pl-6 space-y-2 text-gray-600">
+                {project.features.map((f, idx) => (
+                  <li key={idx}>{f}</li>
+                ))}
+              </ul>
+            )}
 
-          {renderSection('Uitdagingen', <p className="text-gray-600">{project.challenges}</p>)}
+          {project.challenges && renderSection('Uitdagingen', <p className="text-gray-600">{project.challenges}</p>)}
 
-          {project.screenshots?.length > 0 &&
+          {project.screenshots && project.screenshots.length > 0 &&
             renderSection(
               'Schermafbeeldingen',
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -151,12 +154,18 @@ export default function ProjectDetail({ params }: ProjectDetailProps) {
                   />
                 ))}
               </div>
-            )}
+            )
+          }
 
-          {renderSection('Geleerde Lessen', <p className="text-gray-600">{project.lessonsLearned}</p>)}
-          {renderSection('Impact', <p className="text-gray-600">{project.impact}</p>)}
-          {renderSection('Toekomstige Verbeteringen', <p className="text-gray-600">{project.futureImprovements}</p>)}
+
+
+          {project.lessonsLearned && renderSection('Geleerde Lessen', <p className="text-gray-600">{project.lessonsLearned}</p>)}
+          {project.impact && renderSection('Impact', <p className="text-gray-600">{project.impact}</p>)}
+          {project.futureImprovements &&
+            renderSection('Toekomstige Verbeteringen', <p className="text-gray-600">{project.futureImprovements}</p>)}
           {project.details && renderSection('Extra Details', <p className="text-gray-600">{project.details}</p>)}
+
+          {project.demoUrl && renderSection('Demo', <YouTubeEmbed url={project.demoUrl} />)}
         </motion.div>
       </div>
     </section>
