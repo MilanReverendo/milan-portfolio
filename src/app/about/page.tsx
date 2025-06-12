@@ -1,19 +1,28 @@
-"use client";
-import React from "react";
-import { motion } from "framer-motion";
-import Image from "next/image";
-import SkillCard from "@/components/SkillCard";
-import HobbyCard from "@/components/HobbyCard";
-import { SiTypescript, SiNextdotjs, SiTailwindcss, SiAngular, SiDotnet, SiPostgresql } from "react-icons/si";
-import { FaReact, FaJava, FaGamepad, FaUsers } from "react-icons/fa";
-import { GiHiking } from "react-icons/gi";
-import Link from "next/link";
-import { FileText } from "lucide-react";
+'use client';
+
+import React from 'react';
+import { motion } from 'framer-motion';
+import Image from 'next/image';
+import SkillCard from '@/components/SkillCard';
+import HobbyCard from '@/components/HobbyCard';
+import {
+  SiTypescript,
+  SiNextdotjs,
+  SiTailwindcss,
+  SiAngular,
+  SiDotnet,
+  SiPostgresql,
+} from 'react-icons/si';
+import { FaReact, FaJava, FaGamepad, FaUsers } from 'react-icons/fa';
+import { GiHiking } from 'react-icons/gi';
+import Link from 'next/link';
+import { FileText } from 'lucide-react';
 
 interface Skill {
   icon: React.ComponentType<React.SVGProps<SVGSVGElement>>;
   name: string;
-  proficiency: number;
+  proficiency: number;          // for bar fill
+  level: 'Beginnend' | 'Gemiddeld' | 'Gevorderd' | 'Expert';
   ariaLabel: string;
 }
 
@@ -25,20 +34,20 @@ interface Hobby {
 
 export default function OverMij() {
   const skills: Skill[] = [
-    { icon: SiTypescript, name: "TypeScript", proficiency: 85, ariaLabel: "TypeScript vaardigheid: 85%" },
-    { icon: FaReact, name: "React", proficiency: 75, ariaLabel: "React vaardigheid: 75%" },
-    { icon: SiNextdotjs, name: "Next.js", proficiency: 70, ariaLabel: "Next.js vaardigheid: 70%" },
-    { icon: SiTailwindcss, name: "Tailwind CSS", proficiency: 85, ariaLabel: "Tailwind CSS vaardigheid: 85%" },
-    { icon: SiAngular, name: "Angular", proficiency: 90, ariaLabel: "Angular vaardigheid: 90%" },
-    { icon: FaJava, name: "Java", proficiency: 75, ariaLabel: "Java vaardigheid: 75%" },
-    { icon: SiDotnet, name: ".NET", proficiency: 80, ariaLabel: ".NET vaardigheid: 80%" },
-    { icon: SiPostgresql, name: "SQL", proficiency: 85, ariaLabel: "SQL vaardigheid: 85%" },
+    { icon: SiTypescript, name: 'TypeScript', proficiency: 85, level: 'Gevorderd', ariaLabel: 'TypeScript vaardigheid: gevorderd' },
+    { icon: FaReact, name: 'React', proficiency: 75, level: 'Gemiddeld', ariaLabel: 'React vaardigheid: gemiddeld' },
+    { icon: SiNextdotjs, name: 'Next.js', proficiency: 70, level: 'Gemiddeld', ariaLabel: 'Next.js vaardigheid: gemiddeld' },
+    { icon: SiTailwindcss, name: 'Tailwind CSS', proficiency: 85, level: 'Gevorderd', ariaLabel: 'Tailwind CSS vaardigheid: gevorderd' },
+    { icon: SiAngular, name: 'Angular', proficiency: 90, level: 'Gevorderd', ariaLabel: 'Angular vaardigheid: gevorderd' },
+    { icon: FaJava, name: 'Java', proficiency: 75, level: 'Gemiddeld', ariaLabel: 'Java vaardigheid: gemiddeld' },
+    { icon: SiDotnet, name: '.NET', proficiency: 80, level: 'Gevorderd', ariaLabel: '.NET vaardigheid: gevorderd' },
+    { icon: SiPostgresql, name: 'SQL', proficiency: 85, level: 'Gevorderd', ariaLabel: 'SQL vaardigheid: gevorderd' },
   ];
 
   const hobbies: Hobby[] = [
-    { icon: FaGamepad, name: "Gaming", description: "Ik speel graag strategische en avontuurlijke games om te ontspannen en creatief te blijven." },
-    { icon: FaUsers, name: "Chiro", description: "Jeugdbegeleiding en teambuilding via creatieve activiteiten en buitenavonturen." },
-    { icon: GiHiking, name: "Wandelen", description: "Wandelen helpt mij mijn geest te verfrissen en te genieten van de natuur." },
+    { icon: FaGamepad, name: 'Gaming', description: 'Ik speel graag strategische en avontuurlijke games om te ontspannen en creatief te blijven.' },
+    { icon: FaUsers, name: 'Chiro', description: 'Jeugdbegeleiding en teambuilding via creatieve activiteiten en buitenavonturen.' },
+    { icon: GiHiking, name: 'Wandelen', description: 'Wandelen helpt mij mijn geest te verfrissen en te genieten van de natuur.' },
   ];
 
   return (
@@ -57,7 +66,7 @@ export default function OverMij() {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start mb-16">
+<div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start mb-16">
           {/* Afbeelding */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
@@ -73,7 +82,7 @@ export default function OverMij() {
             >
               <div className="absolute inset-0 bg-gradient-to-r from-blue-400 to-purple-500 opacity-30 blur-lg"></div>
               <Image
-                src="/images/ai.jpg"
+                src="/images/milan.jpeg"
                 alt="Portret van Milan"
                 width={300}
                 height={300}
@@ -132,7 +141,6 @@ export default function OverMij() {
             </div>
           </div>
         </div>
-
         {/* Skills */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -150,6 +158,7 @@ export default function OverMij() {
               icon={skill.icon}
               name={skill.name}
               proficiency={skill.proficiency}
+              level={skill.level}
               ariaLabel={skill.ariaLabel}
             />
           ))}
