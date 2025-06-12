@@ -67,10 +67,10 @@ export default function StageErvaring() {
         >
           <h2 className="text-2xl font-semibold mb-4">Mijn Rol & Aanpak</h2>
           <p className="text-gray-600 leading-relaxed mb-4">
-            Als stagiair heb ik in een Agile-team gewerkt aan de digitalisering van het sign-off-proces. Na een grondige analyse van de bestaande Word-gebaseerde workflow, ontwierp ik mockups en definieerde ik REST-API’s. Daarna implementeerde ik in Angular 19 en .NET 8 de belangrijkste features, waarbij ik voortdurend afstemde met senior developers en eindgebruikers.
+            Als stagiair heb ik in een Agile-team gewerkt aan de digitalisering van het sign-off-proces. Na een grondige analyse van de bestaande Word-gebaseerde workflow, ontwierp ik mockups en definieerde ik REST-API&apos;s. Daarna implementeerde ik in Angular 19 en .NET 8 de belangrijkste features, waarbij ik voortdurend afstemde met senior developers en eindgebruikers.
           </p>
           <p className="text-gray-600 leading-relaxed">
-            Mijn werkwijze bestond uit wekelijkse demo’s, peer reviews en scrums, zodat ik snel kon bijsturen en feedback integreerde in de sprintplanning.
+            Mijn werkwijze bestond uit wekelijkse demo&apos;s, peer reviews en scrums, zodat ik snel kon bijsturen en feedback integreerde in de sprintplanning.
           </p>
         </motion.div>
 
@@ -107,7 +107,7 @@ export default function StageErvaring() {
             <div>
               <h3 className="font-medium">Notificaties & Integratie</h3>
               <p className="mt-2">
-                Automatische e-mailnotificaties bij statusveranderingen en inactiviteit, en automatische goedkeuring van Deploy Requests wanneer een sign-off als "OK" is gemarkeerd.
+                Automatische e-mailnotificaties bij statusveranderingen en inactiviteit, en automatische goedkeuring van Deploy Requests wanneer een sign-off als &quot;OK&quot; is gemarkeerd.
               </p>
             </div>
           </div>
@@ -125,7 +125,7 @@ export default function StageErvaring() {
             Technologieën & Architectuur
           </motion.h2>
           <p className="text-gray-600 leading-relaxed mb-3">
-            De frontend is opgebouwd met Angular 19, gebruikmakend van modulaire componenten, services en state-management. Voor de backend is .NET 8 ingezet, met REST-API’s, Entity Framework Core voor data‑toegang en SQL Server als database.
+            De frontend is opgebouwd met Angular 19, gebruikmakend van modulaire componenten, services en state-management. Voor de backend is .NET 8 ingezet, met REST-API&apos;s, Entity Framework Core voor data&ndash;toegang en SQL Server als database.
           </p>
           <p className="text-gray-600 leading-relaxed">
             Autorisatie is geregeld via role-based access control en JWT-tokens.  De applicatie is gehost in Azure, met CI/CD-pijplijnen voor automatische deployments.

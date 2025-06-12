@@ -139,11 +139,11 @@ export default function ProjectDetail({ params }: ProjectDetailProps) {
 
           {project.challenges && renderSection('Uitdagingen', <p className="text-gray-600">{project.challenges}</p>)}
 
-          {project.screenshots?.length! > 0 &&
+          {project.screenshots && project.screenshots.length > 0 &&
             renderSection(
               'Schermafbeeldingen',
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                {project.screenshots?.map((src, idx) => (
+                {project.screenshots.map((src, idx) => (
                   <Image
                     key={idx}
                     src={src}
@@ -154,7 +154,9 @@ export default function ProjectDetail({ params }: ProjectDetailProps) {
                   />
                 ))}
               </div>
-            )}
+            )
+          }
+
 
 
           {project.lessonsLearned && renderSection('Geleerde Lessen', <p className="text-gray-600">{project.lessonsLearned}</p>)}
